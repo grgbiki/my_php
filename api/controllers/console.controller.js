@@ -63,7 +63,6 @@ addOne = (req, res) => {
     });
 }
 
-
 getOne = (req, res) => {
     const gameConsoleId = req.params.consoleId;
 
@@ -72,7 +71,7 @@ getOne = (req, res) => {
 
     if (!ObjectId.isValid(gameConsoleId)) {
         status = 404;
-        response = { "message": "Invalid id" };
+        response = { "message": process.env.RESPONSE_INVALID_ID };
         res.status(status).json(response);
     } else
         GameConsole.findById(gameConsoleId, function (err, gameConsole) {
@@ -99,7 +98,7 @@ updateOne = (req, res) => {
 
     if (!ObjectId.isValid(gameConsoleId)) {
         status = 404;
-        response = { "message": "Invalid id" };
+        response = { "message": process.env.RESPONSE_INVALID_ID };
         res.status(status).json(response);
     } else
         GameConsole.findById(gameConsoleId).select("-games").exec((err, gameConsole) => {
@@ -130,7 +129,6 @@ updateOne = (req, res) => {
         })
 }
 
-
 deleteOne = (req, res) => {
     const gameConsoleId = req.params.consoleId;
 
@@ -139,7 +137,7 @@ deleteOne = (req, res) => {
 
     if (!ObjectId.isValid(gameConsoleId)) {
         status = 404;
-        response = { "message": "Invalid id" };
+        response = { "message": process.env.RESPONSE_INVALID_ID };
         res.status(status).json(response);
     } else
         GameConsole.findByIdAndDelete(gameConsoleId, (err, gameConsole) => {

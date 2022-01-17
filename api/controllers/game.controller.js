@@ -10,7 +10,7 @@ getAll = (req, res) => {
 
     if (!ObjectId.isValid(gameConsoleId)) {
         status = 404;
-        response = { "message": "Invalid id" };
+        response = { "message": process.env.RESPONSE_INVALID_ID };
         res.status(status).json(response);
     } else
         GameConsole.findById(gameConsoleId, (err, gameConsole) => {
@@ -40,7 +40,7 @@ addOne = (req, res) => {
 
     if (!ObjectId.isValid(gameConsoleId)) {
         status = 404;
-        response = { "message": "Invalid id" };
+        response = { "message": process.env.RESPONSE_INVALID_ID };
         res.status(status).json(response);
     } else
         GameConsole.findById(gameConsoleId, (err, gameConsole) => {
@@ -76,7 +76,7 @@ getOne = (req, res) => {
 
     if (!ObjectId.isValid(gameConsoleId) || !ObjectId.isValid(gameId)) {
         status = 404;
-        response = { "message": "Invalid ids" };
+        response = { "message": process.env.RESPONSE_INVALID_ID };
         res.status(status).json(response);
     } else
         GameConsole.findById(gameConsoleId, (err, gameConsole) => {
@@ -105,7 +105,7 @@ deleteOne = (req, res) => {
 
     if (!ObjectId.isValid(gameConsoleId) || !ObjectId.isValid(gameId)) {
         status = 404;
-        response = { "message": "Invalid ids" };
+        response = { "message": process.env.RESPONSE_INVALID_ID };
         res.status(status).json(response);
     } elseGameConsole.findById(gameConsoleId, (err, gameConsole) => {
         if (err) {
@@ -143,7 +143,7 @@ updateOne = (req, res) => {
 
     if (!ObjectId.isValid(gameConsoleId) || !ObjectId.isValid(gameId)) {
         status = 404;
-        response = { "message": "Invalid ids" };
+        response = { "message": process.env.RESPONSE_INVALID_ID };
         res.status(status).json(response);
     } elseGameConsole.findById(gameConsoleId, (err, gameConsole) => {
         if (err) {
