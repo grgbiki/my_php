@@ -28,16 +28,31 @@ getAll = (req, res) => {
         res.status(status).json(response);
     }
     else {
-        GameConsole.find().skip(offset).limit(count).exec(function (err, gameConsoles) {
-            if (err) {
-                status = 500;
-                response = { "message": "Server Error: " + process.env.COUNT_LIMIT }
-            } else {
-                console.log("Found console", gameConsoles.length);
-                response = gameConsoles;
-            }
-            res.status(status).json(response);
-        });
+        if (req.query && req.query.searchQuery) {
+            GameConsole.find({ name: { $regex: req.query.searchQuery } }).skip(offset).limit(count).exec(function (err, gameConsoles) {
+                if (err) {
+                    status = 500;
+                    response = { "message": "Server Error: " + process.env.COUNT_LIMIT }
+                } else {
+                    console.log("Found console", gameConsoles.length);
+                    response = gameConsoles;
+                }
+                res.status(status).json(response);
+            });
+        }
+        else {
+            console.log("Test");
+            GameConsole.find().skip(offset).limit(count).exec(function (err, gameConsoles) {
+                if (err) {
+                    status = 500;
+                    response = { "message": "Server Error: " + process.env.COUNT_LIMIT }
+                } else {
+                    console.log("Found console", gameConsoles.length);
+                    response = gameConsoles;
+                }
+                res.status(status).json(response);
+            });
+        }
     }
 }
 
@@ -59,6 +74,7 @@ addOne = (req, res) => {
         } else {
             response = gameConsole;
         }
+        console.log(status);
         res.status(status).json(response);
     });
 }

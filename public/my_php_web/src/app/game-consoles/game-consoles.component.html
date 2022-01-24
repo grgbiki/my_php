@@ -1,1 +1,8 @@
-<p>game-consoles works!</p>
+<form>
+    <input type="text" id="search" name="search" placeholder="Search" [(ngModel)]="search" />
+    <button (click)="searchConsole()">Search</button>
+</form>
+<ul>
+    <li *ngFor="let console of gameConsoles"><a routerLink="/console/{{console._id}}">{{console.name}} :
+            {{console.releaseDate}} </a></li>
+</ul>

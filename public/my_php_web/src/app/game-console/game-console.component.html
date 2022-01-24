@@ -1,1 +1,33 @@
-<p>game-console works!</p>
+<div [hidden]="update">
+    <h1>{{gameConsole.name}}</h1>
+    Brand: {{gameConsole.brand}}<br />
+    Released Date: {{gameConsole.releaseDate}}<br />
+    <h2>Games</h2>
+    <ul>
+        <li *ngFor="let game of gameConsole.games">{{game.name}} </li>
+    </ul>
+    <form>
+        <input type="text" name="name" [(ngModel)]="newGame.name" />
+        <input type="text" name="price" [(ngModel)]="newGame.price" />
+        <button (click)="addGame()">Add Game</button>
+    </form>
+</div>
+
+<div [hidden]="!update">
+    <h2>Update Console</h2>
+    <br />
+</div>
+
+<form [hidden]="!update">
+    Name: <input type="text" id="name" name="name" required [(ngModel)]="gameConsole.name" /><br />
+    Brand: <input type="text" id="brand" name="price" required [(ngModel)]="gameConsole.brand" /><br />
+    Released Date: <input type=" text" id="releaseDate" name="releaseDate" required
+        [(ngModel)]="gameConsole.releaseDate" /><br />
+    <button (click)="toggleUpdate()">Cancel</button>
+    <button (click)="updateConsole()" type="submit">Submit</button>
+</form>
+
+<div [hidden]="update">
+    <button (click)="toggleUpdate()">Update</button>
+    <button style="background-color: red; color: white;" (click)="deleteConsole()">Delete</button>
+</div>

@@ -1,0 +1,8 @@
+<form>
+    Name: <input type="text" id="name" name="name" required [(ngModel)]="newConsole.name" /><br />
+    Brand: <input type="text" id="brand" name="price" required [(ngModel)]="newConsole.brand" /><br />
+    Released Date: <input type=" text" id="releaseDate" name="releaseDate" required
+        [(ngModel)]="newConsole.releaseDate" /><br />
+
+    <button (click)="submit()" type="submit">Add</button>
+</form>
