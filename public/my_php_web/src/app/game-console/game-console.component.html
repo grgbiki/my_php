@@ -4,7 +4,7 @@
     Released Date: {{gameConsole.releaseDate}}<br />
     <h2>Games</h2>
     <ul>
-        <li *ngFor="let game of gameConsole.games">{{game.name}} </li>
+        <li *ngFor="let game of gameConsole.games">{{game.name}} {{game.price | currency}}</li>
     </ul>
     <form>
         <input type="text" name="name" [(ngModel)]="newGame.name" />

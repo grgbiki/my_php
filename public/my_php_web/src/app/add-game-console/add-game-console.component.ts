@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { GameConsole } from '../game-console/game-console.component';
 import { PhpApiService } from '../php-api.service';
 
@@ -9,15 +10,17 @@ import { PhpApiService } from '../php-api.service';
 })
 export class AddGameConsoleComponent implements OnInit {
 
-  newConsole = new GameConsole("asdasd", "asdasd", "asdads");
+  newConsole = new GameConsole("", "", "");
 
-  constructor(private phpApiService: PhpApiService) { }
+  constructor(private router: Router, private phpApiService: PhpApiService) { }
 
   ngOnInit(): void {
   }
 
   submit() {
     // console.log("Test", JSON.parse(JSON.stringify(this.newConsole)));
-    this.phpApiService.postConsole(this.newConsole);
+    this.phpApiService.postConsole(this.newConsole).then(() => {
+      this.router.navigate(['/consoles'])
+    });
   }
 }

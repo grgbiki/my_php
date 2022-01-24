@@ -12,17 +12,19 @@ export class GameConsolesComponent implements OnInit {
   gameConsoles: GameConsole[] = [];
   newConsole = new GameConsole("Test", "Test", "Test");
   search: string = "";
+  pageNumber: number = 1;
 
   constructor(private phpApiService: PhpApiService) { }
 
   ngOnInit(): void {
-    this.phpApiService.getConsoles()
+    this.phpApiService.getConsoles(this.pageNumber)
       .then(consoles => this._setConsole(consoles))
       .catch(err => this._handleError(err));
   }
 
   searchConsole() {
-    this.phpApiService.getConsoles(this.search)
+    this.pageNumber = 1;
+    this.phpApiService.getConsoles(this.pageNumber, this.search)
       .then(consoles => this._setConsole(consoles))
       .catch(err => this._handleError(err));
   }
@@ -34,5 +36,18 @@ export class GameConsolesComponent implements OnInit {
   private _setConsole(consoles: GameConsole[]): void {
     this.gameConsoles = consoles;
     console.log(this.gameConsoles);
+  }
+
+  next() {
+    this.pageNumber = this.pageNumber + 1;
+    this.phpApiService.getConsoles(this.pageNumber)
+      .then(consoles => this._setConsole(consoles))
+      .catch(err => this._handleError(err));
+  }
+  previous() {
+    this.pageNumber = this.pageNumber - 1;
+    this.phpApiService.getConsoles(this.pageNumber)
+      .then(consoles => this._setConsole(consoles))
+      .catch(err => this._handleError(err));
   }
 }

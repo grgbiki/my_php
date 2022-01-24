@@ -6,3 +6,6 @@
     <li *ngFor="let console of gameConsoles"><a routerLink="/console/{{console._id}}">{{console.name}} :
             {{console.releaseDate}} </a></li>
 </ul>
+
+<button [disabled]="pageNumber==1" (click)="previous()">Previous</button>
+<button [disabled]="gameConsoles.length <5" (click)="next()">Next</button>

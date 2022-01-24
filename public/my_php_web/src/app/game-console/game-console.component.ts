@@ -105,7 +105,10 @@ export class GameConsoleComponent implements OnInit {
 
   addGame(): void {
     this.phpApiService.postGame(this.consoleId, this.newGame)
-      .then(gameConsole => this._setConsole(gameConsole))
+      .then(gameConsole => {
+        this._setConsole(gameConsole);
+        this.newGame = new Game("", 0);
+      })
       .catch(err => this._handleError(err));;
   }
 }

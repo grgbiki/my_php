@@ -15,7 +15,6 @@ getAll = (req, res) => {
     if (req.query && req.query.count) {
         count = parseInt(req.query.count, 10);
     }
-
     if (isNaN(offset) || offset < 0) {
         offset = 0;
     }
@@ -24,6 +23,13 @@ getAll = (req, res) => {
         response = { "message": "invalid params: count should be a number and less than " + process.env.COUNT_LIMIT }
 
     }
+
+    if (req.query && req.query.page) {
+        let page = parseInt(req.query.page, 10);
+        console.log(page);
+        offset = count * (page - 1);
+    }
+    console.log(offset);
     if (status !== 200) {
         res.status(status).json(response);
     }

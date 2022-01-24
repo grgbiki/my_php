@@ -10,12 +10,12 @@ export class PhpApiService {
 
   constructor(private httpClient: HttpClient) { }
 
-  public getConsoles(searchQuery?: string): Promise<GameConsole[]> {
-    let httpParams;
+  public getConsoles(pageNumber: number, searchQuery?: string): Promise<GameConsole[]> {
+    let httpParams = new HttpParams();
     if (searchQuery) {
-      httpParams = new HttpParams();
       httpParams = httpParams.append("searchQuery", searchQuery)
     }
+    httpParams = httpParams.append("page", pageNumber)
 
     const url = this.baseUrl + "consoles";
     return this.httpClient.get(url, { params: httpParams }).toPromise()
@@ -32,7 +32,9 @@ export class PhpApiService {
 
   public postConsole(gameConsole: GameConsole): Promise<GameConsole> {
     const json = gameConsole.toJson();
-    const url = this.baseUrl + "console/";
+    const url = this.baseUrl + "consoles";
+    console.log(url);
+
     return this.httpClient.post(url, json).toPromise()
       .then(response => response as GameConsole)
       .catch(this.handleError);
