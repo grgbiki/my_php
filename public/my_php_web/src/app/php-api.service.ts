@@ -40,10 +40,9 @@ export class PhpApiService {
       .catch(this.handleError);
   }
 
-  public updateConsole(consoleId: string, newGameConsole: GameConsole): Promise<void> {
-    const json = newGameConsole.toJson();
+  public updateConsole(consoleId: string, gameConsole: GameConsole): Promise<void> {
     const url = this.baseUrl + "console/" + consoleId;
-    return this.httpClient.put(url, json).toPromise()
+    return this.httpClient.put(url, gameConsole).toPromise()
       .then(response => response as GameConsole)
       .catch(this.handleError);
   }
